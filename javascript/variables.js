@@ -14,6 +14,12 @@ export const SHOW_ABOUT_CARD_CLASS = "showCard";
 
 // FIREBASE VARIABLES
 
+// I think it would be better to have object like 
+// const DB_NAMES = {
+//     ABOUT: 'about-cards',
+//     ...
+// } 
+// for getting it like DB_NAMES.ABOUT
 export const ABOUT_DB_NAME = "about-cards";
 export const RULES_DB_NAME = "rules";
 export const MEMBERS_DB_NAME = "members";

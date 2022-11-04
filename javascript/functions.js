@@ -11,6 +11,7 @@ import {
 } from "../javascript/variables.js";
 
 import {generateMarksHTML} from '../javascript/htmlTemplates.js'
+// Use npm instead cdn
 import Swiper from "https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.esm.browser.min.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-app.js";
 import {
@@ -40,7 +41,7 @@ let ratingCardsData = [];
 
 export function checkElement(list, classname) {
   let elements = document.querySelectorAll(list);
-  elements = Array.from(elements);
+  // elements = Array.from(elements); You don`t need this
 
   const triggerBottom = (window.innerHeight / 5) * 4;
 
@@ -56,7 +57,8 @@ export function checkElement(list, classname) {
 }
 
 //   FIREBASE FUNCTIONS
-
+// getCardsData should be responsible only for getting data
+// It should work like this getCardsData().then(data => renderCardList(data))
 export function getCardsData(dbName, generate, list) {
   const dbRef = ref(db);
 
@@ -89,13 +91,9 @@ export function getCardsData(dbName, generate, list) {
   });
 }
 
-function sortCardsByPlace(cards) {
-  cards.sort(function (a, b) {
-    return a.place - b.place;
-  });
-
-  return cards;
-}
+// Use arrow functions, it`s prettier
+const sortCardsByPlace = (cards) =>
+  cards.sort((a, b) => a.place - b.place);
 
 function wait() {
   return new Promise((resolve, reject) => {
@@ -136,11 +134,8 @@ function showModalTemplate(cardData) {
 
 function sortMarks(data) {
   let byMark = data.slice(0);
-  byMark.sort(function (a, b) {
-    return b.mark - a.mark;
-  });
 
-  return byMark;
+  return byMark.sort((a, b) => b.mark - a.mark);
 }
 
 function fillModal(cardData) {
@@ -169,7 +164,7 @@ function renderCardList(cardList, generate, list) {
 }
 
 function createMembersSwiper() {
-  const swiper = new Swiper(".members-swiper", {
+  return new Swiper(".members-swiper", {
     grabCursor: true,
     effect: "coverflow",
     centeredSlides: true,
@@ -187,12 +182,10 @@ function createMembersSwiper() {
       clickable: true,
     },
   });
-
-  return swiper;
 }
 
 function createRatingSwiper() {
-  const swiper2 = new Swiper(".rating-swiper", {
+  return new Swiper(".rating-swiper", {
     slidesPerView: "3",
     spaceBetween: 30,
     slidesPerGroup: 3,
@@ -201,12 +194,10 @@ function createRatingSwiper() {
       prevEl: ".swiper-button-prev",
     },
   });
-
-  return swiper2;
 }
 
 function createBooksSwiper() {
-  const swiper3 = new Swiper(".books-swiper", {
+  return new Swiper(".books-swiper", {
     slidesPerView: "3",
     // spaceBetween: 150,
     slidesPerGroup: 3,
@@ -215,6 +206,4 @@ function createBooksSwiper() {
       prevEl: ".swiper-button-prev",
     },
   });
-
-  return swiper3;
 }
