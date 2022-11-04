@@ -40,7 +40,7 @@ getCardsData(BOOKS_DB_NAME, generateBooksCardHTML, booksCardList);
 getCardsData(CONTACTS_DB_NAME, generateContactCardHTML, contactsCardList);
 
 function wait() {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     setTimeout(() => {
       resolve();
     }, 200);
@@ -67,7 +67,8 @@ anime.timeline({ loop: false }).add({
   opacity: [0, 1],
   easing: "easeInOutQuad",
   duration: 2250,
-  delay: (el, i) => 150 * (i + 1),
+  // If you dont neet first parameter - name it _
+  delay: (_, i) => 150 * (i + 1),
 });
 
 let lastScrollY = window.scrollY;
