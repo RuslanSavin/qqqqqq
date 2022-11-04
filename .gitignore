@@ -1,0 +1,11 @@
+.idea
+.DS_Store
+node_modules/
+styles/
+*.css
+.sass-cache/
+*.css.map
+*.sass.map
+*.scss.map
+
+
